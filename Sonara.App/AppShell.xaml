@@ -6,9 +6,17 @@
     xmlns:local="clr-namespace:Sonara.App"
     Title="Sonara">
 
-    <ShellContent
-        Title="Библиотека"
-        ContentTemplate="{DataTemplate local:LibraryPage}"
-        Route="LibraryPage" />
+    <TabBar>
+        <Tab Title="Sonara">
+            <ShellContent
+                Title="Библиотека"
+                ContentTemplate="{DataTemplate local:LibraryPage}"
+                Route="LibraryPage" />
+            <ShellContent
+                Title="Настройки"
+                ContentTemplate="{DataTemplate local:SettingsPage}"
+                Route="SettingsPage" />
+        </Tab>
+    </TabBar>
 
 </Shell>

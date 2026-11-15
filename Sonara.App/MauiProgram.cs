@@ -22,6 +22,8 @@ namespace Sonara.App
             builder.Services.AddSonaraServices();                 // сервисы (заглушки)
             builder.Services.AddTransient<LibraryViewModel>();    // ViewModel
             builder.Services.AddTransient<LibraryPage>();         // страница
+            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<SettingsPage>();
             
             return builder.Build();
         }
