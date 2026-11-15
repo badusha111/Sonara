@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Sonara.App"
+             x:Class="Sonara.App.SettingsPage"
+             x:DataType="local:SettingsViewModel"
+             Title="Настройки">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="12" RowSpacing="8">
+        <Label Text="Папки музыки" FontSize="20" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <Entry Placeholder="Путь к папке"
+                   Text="{Binding FolderPath, Mode=TwoWay}"
+                   IsEnabled="{Binding IsNotBusy}"
+                   ReturnType="Done"
+                   ReturnCommand="{Binding AddFolderCommand}"
+                   SemanticProperties.Description="Путь к папке с музыкой" />
+            <Button Grid.Column="1"
+                    Text="Добавить"
+                    Command="{Binding AddFolderCommand}" />
+        </Grid>
+
+        <Label Grid.Row="2"
+               Text="{Binding ErrorMessage}"
+               IsVisible="{Binding HasError}"
+               TextColor="{AppThemeBinding Light=DarkRed, Dark=LightCoral}" />
+
+        <ActivityIndicator Grid.Row="3"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}" />
+
+        <CollectionView Grid.Row="4"
+                        ItemsSource="{Binding LibraryFolders}"
+                        IsVisible="{Binding IsNotBusy}"
+                        SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="Папки не добавлены" Padding="0,12" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Label Text="{Binding .}" Padding="0,6" LineBreakMode="WordWrap" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
